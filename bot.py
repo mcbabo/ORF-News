@@ -33,17 +33,6 @@ def get_channels():
 bot = commands.Bot(command_prefix = "+", help_command = None)
 
 
-@bot.command()
-async def evaluate(ctx, *, code):
-    str_obj = io.StringIO() #Retrieves a stream of data
-    try:
-        with contextlib.redirect_stdout(str_obj):
-            exec(code)
-    except Exception as e:
-        return await ctx.send(f"```{e.__class__.__name__}: {e}```")
-    await ctx.send(f'```{str_obj.getvalue()}```')
-    print(str_obj.getvalue())
-
 @bot.event
 async def on_guild_join(guild):
     with open("prefix.json", "r") as f:
